@@ -1,4 +1,4 @@
-## Tagged Identity 0.2.0
+## Tagged Identity 0.1.1
 
 * Fixed badges in `README.md` file.
 
