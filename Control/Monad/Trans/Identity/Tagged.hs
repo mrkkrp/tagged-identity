@@ -8,11 +8,11 @@
 -- Portability :  portable
 --
 -- The module provides a monad transformer that works just like 'IdentityT',
--- but can be tagged at type level. This allows to work with monad stacks as
--- usual, but you can make two identical monad stacks have different types.
--- The main application of this is, of course, the ability to have different
--- instances for otherwise the same stacks without having to do opaque
--- @newtype@ wrapping which is not handy with monad stacks.
+-- but can be tagged at the type level. This allows to work with monad
+-- stacks as usual, but you can make two identical monad stacks have
+-- different types. The main application of this is, of course, the ability
+-- to have different instances for otherwise the same stacks without having
+-- to do opaque @newtype@ wrapping which is not handy with monad stacks.
 
 {-# LANGUAGE CPP                   #-}
 {-# LANGUAGE FlexibleInstances     #-}
