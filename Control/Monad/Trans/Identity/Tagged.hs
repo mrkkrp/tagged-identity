@@ -111,14 +111,16 @@ instance Alternative m => Alternative (TaggedT tag m) where
     {-# INLINE (<|>) #-}
 
 instance Monad m => Monad (TaggedT tag m) where
-#if !(MIN_VERSION_base(4,8,0))
+#if !MIN_VERSION_base(4,8,0)
     return = TaggedT . return
     {-# INLINE return #-}
 #endif
     m >>= k = TaggedT $ runTaggedT . k =<< runTaggedT m
     {-# INLINE (>>=) #-}
+#if !MIN_VERSION_base(4,9,0)
     fail msg = TaggedT $ fail msg
     {-# INLINE fail #-}
+#endif
 
 #if MIN_VERSION_base(4,9,0)
 instance Fail.MonadFail m => Fail.MonadFail (TaggedT tag m) where
