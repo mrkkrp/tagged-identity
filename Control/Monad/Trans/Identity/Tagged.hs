@@ -14,7 +14,6 @@
 -- to have different instances for otherwise the same stacks without having
 -- to do opaque @newtype@ wrapping which is not handy with monad stacks.
 
-{-# LANGUAGE CPP                   #-}
 {-# LANGUAGE FlexibleInstances     #-}
 {-# LANGUAGE MultiParamTypeClasses #-}
 {-# LANGUAGE UndecidableInstances  #-}
@@ -32,22 +31,14 @@ import Control.Applicative
 import Control.Monad (MonadPlus (..))
 import Control.Monad.Cont.Class
 import Control.Monad.Error.Class
+import Control.Monad.Fix (MonadFix (..))
 import Control.Monad.IO.Class (MonadIO (..))
 import Control.Monad.RWS.Class
 import Control.Monad.Signatures
 import Control.Monad.Trans.Class (MonadTrans (..))
 import Control.Monad.Zip (MonadZip (..))
-
-#if !MIN_VERSION_base(4,8,0)
-import Data.Foldable (Foldable (..))
-import Data.Traversable (Traversable (..))
-#endif
-
-#if MIN_VERSION_base(4,9,0)
 import Data.Functor.Classes
 import qualified Control.Monad.Fail as Fail
-#endif
-import Control.Monad.Fix (MonadFix (..))
 
 -- | Identity monad transformer with a type-level tag.
 
@@ -56,7 +47,6 @@ newtype TaggedT tag f a = TaggedT { runTaggedT :: f a }
 ----------------------------------------------------------------------------
 -- Standard instances
 
-#if MIN_VERSION_base(4,9,0)
 instance Eq1 f => Eq1 (TaggedT tag f) where
     liftEq eq (TaggedT x) (TaggedT y) = liftEq eq x y
     {-# INLINE liftEq #-}
@@ -84,7 +74,6 @@ instance (Read1 f, Read a) => Read (TaggedT tag f a) where
 
 instance (Show1 f, Show a) => Show (TaggedT tag f a) where
   showsPrec = showsPrec1
-#endif
 
 instance Functor m => Functor (TaggedT tag m) where
     fmap f = mapTaggedT (fmap f)
@@ -111,22 +100,12 @@ instance Alternative m => Alternative (TaggedT tag m) where
     {-# INLINE (<|>) #-}
 
 instance Monad m => Monad (TaggedT tag m) where
-#if !MIN_VERSION_base(4,8,0)
-    return = TaggedT . return
-    {-# INLINE return #-}
-#endif
     m >>= k = TaggedT $ runTaggedT . k =<< runTaggedT m
     {-# INLINE (>>=) #-}
-#if !MIN_VERSION_base(4,9,0)
-    fail msg = TaggedT $ fail msg
-    {-# INLINE fail #-}
-#endif
 
-#if MIN_VERSION_base(4,9,0)
 instance Fail.MonadFail m => Fail.MonadFail (TaggedT tag m) where
     fail msg = TaggedT $ Fail.fail msg
     {-# INLINE fail #-}
-#endif
 
 instance MonadPlus m => MonadPlus (TaggedT tag m) where
     mzero = TaggedT mzero
@@ -142,11 +121,9 @@ instance MonadIO m => MonadIO (TaggedT tag m) where
     liftIO = TaggedT . liftIO
     {-# INLINE liftIO #-}
 
-#if MIN_VERSION_base(4,4,0)
 instance MonadZip m => MonadZip (TaggedT tag m) where
     mzipWith f = lift2TaggedT (mzipWith f)
     {-# INLINE mzipWith #-}
-#endif
 
 instance MonadTrans (TaggedT tag) where
     lift = TaggedT

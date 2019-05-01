@@ -1,3 +1,7 @@
+## Unreleased
+
+* Dropped support for GHC 7.10.
+
 ## Tagged Identity 0.1.2
 
 * Minor documentation and metadata updates.
