@@ -17,6 +17,7 @@
 {-# LANGUAGE FlexibleInstances     #-}
 {-# LANGUAGE MultiParamTypeClasses #-}
 {-# LANGUAGE UndecidableInstances  #-}
+{-# LANGUAGE PolyKinds             #-}
 
 module Control.Monad.Trans.Identity.Tagged
   ( -- * The tagged identity monad transformer
