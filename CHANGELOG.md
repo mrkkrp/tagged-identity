@@ -1,6 +1,6 @@
 ## Unreleased
 
-* Dropped support for GHC 8.0.
+* Dropped support for GHC 8.2 and older.
 
 ## Tagged Identity 0.1.3
 
