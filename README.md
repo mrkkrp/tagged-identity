@@ -13,6 +13,13 @@ The main application of this is, of course, the ability to have different
 instances for otherwise the same stacks without having to do opaque
 `newtype` wrapping which is not handy with monad stacks.
 
+## Contribution
+
+Issues, bugs, and questions may be reported in [the GitHub issue tracker for
+this project](https://github.com/mrkkrp/tagged-identity/issues).
+
+Pull requests are also welcome.
+
 ## License
 
 Copyright © 2016–present Mark Karpov
