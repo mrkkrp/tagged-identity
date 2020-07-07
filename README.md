@@ -4,7 +4,7 @@
 [![Hackage](https://img.shields.io/hackage/v/tagged-identity.svg?style=flat)](https://hackage.haskell.org/package/tagged-identity)
 [![Stackage Nightly](http://stackage.org/package/tagged-identity/badge/nightly)](http://stackage.org/nightly/package/tagged-identity)
 [![Stackage LTS](http://stackage.org/package/tagged-identity/badge/lts)](http://stackage.org/lts/package/tagged-identity)
-[![Build Status](https://travis-ci.org/mrkkrp/tagged-identity.svg?branch=master)](https://travis-ci.org/mrkkrp/tagged-identity)
+![CI](https://github.com/mrkkrp/tagged-identity/workflows/CI/badge.svg?branch=master)
 
 The library provides a monad transformer that works just like `IdentityT`,
 but can be tagged at the type level. This allows to work with monad stacks
