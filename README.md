@@ -7,11 +7,11 @@
 ![CI](https://github.com/mrkkrp/tagged-identity/workflows/CI/badge.svg?branch=master)
 
 The library provides a monad transformer that works just like `IdentityT`,
-but can be tagged at the type level. This allows to work with monad stacks
-as usual, but you can make two identical monad stacks have different types.
-The main application of this is, of course, the ability to have different
-instances for otherwise the same stacks without having to do opaque
-`newtype` wrapping which is not handy with monad stacks.
+but can be tagged at the type level. This allows us to work with monad
+stacks as usual, except we can make two identical monad stacks to have
+different types. The main application for this is, of course, the ability to
+have different instances for otherwise identical stacks without having to do
+`newtype` wrapping.
 
 ## Contribution
 
