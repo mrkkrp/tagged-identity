@@ -48,20 +48,20 @@ newtype TaggedT tag f a = TaggedT {runTaggedT :: f a}
 ----------------------------------------------------------------------------
 -- Standard instances
 
-instance Eq1 f => Eq1 (TaggedT tag f) where
+instance (Eq1 f) => Eq1 (TaggedT tag f) where
   liftEq eq (TaggedT x) (TaggedT y) = liftEq eq x y
   {-# INLINE liftEq #-}
 
-instance Ord1 f => Ord1 (TaggedT tag f) where
+instance (Ord1 f) => Ord1 (TaggedT tag f) where
   liftCompare comp (TaggedT x) (TaggedT y) = liftCompare comp x y
   {-# INLINE liftCompare #-}
 
-instance Read1 f => Read1 (TaggedT tag f) where
+instance (Read1 f) => Read1 (TaggedT tag f) where
   liftReadsPrec rp rl =
     readsData $
       readsUnaryWith (liftReadsPrec rp rl) "TaggedT" TaggedT
 
-instance Show1 f => Show1 (TaggedT tag f) where
+instance (Show1 f) => Show1 (TaggedT tag f) where
   liftShowsPrec sp sl d (TaggedT m) =
     showsUnaryWith (liftShowsPrec sp sl) "TaggedT" d m
 
@@ -77,53 +77,53 @@ instance (Read1 f, Read a) => Read (TaggedT tag f a) where
 instance (Show1 f, Show a) => Show (TaggedT tag f a) where
   showsPrec = showsPrec1
 
-instance Functor m => Functor (TaggedT tag m) where
+instance (Functor m) => Functor (TaggedT tag m) where
   fmap f = mapTaggedT (fmap f)
   {-# INLINE fmap #-}
 
-instance Foldable f => Foldable (TaggedT tag f) where
+instance (Foldable f) => Foldable (TaggedT tag f) where
   foldMap f (TaggedT a) = foldMap f a
   {-# INLINE foldMap #-}
 
-instance Traversable f => Traversable (TaggedT tag f) where
+instance (Traversable f) => Traversable (TaggedT tag f) where
   traverse f (TaggedT a) = TaggedT <$> traverse f a
   {-# INLINE traverse #-}
 
-instance Applicative m => Applicative (TaggedT tag m) where
+instance (Applicative m) => Applicative (TaggedT tag m) where
   pure x = TaggedT (pure x)
   {-# INLINE pure #-}
   (<*>) = lift2TaggedT (<*>)
   {-# INLINE (<*>) #-}
 
-instance Alternative m => Alternative (TaggedT tag m) where
+instance (Alternative m) => Alternative (TaggedT tag m) where
   empty = TaggedT empty
   {-# INLINE empty #-}
   (<|>) = lift2TaggedT (<|>)
   {-# INLINE (<|>) #-}
 
-instance Monad m => Monad (TaggedT tag m) where
+instance (Monad m) => Monad (TaggedT tag m) where
   m >>= k = TaggedT $ runTaggedT . k =<< runTaggedT m
   {-# INLINE (>>=) #-}
 
-instance Fail.MonadFail m => Fail.MonadFail (TaggedT tag m) where
+instance (Fail.MonadFail m) => Fail.MonadFail (TaggedT tag m) where
   fail msg = TaggedT $ Fail.fail msg
   {-# INLINE fail #-}
 
-instance MonadPlus m => MonadPlus (TaggedT tag m) where
+instance (MonadPlus m) => MonadPlus (TaggedT tag m) where
   mzero = TaggedT mzero
   {-# INLINE mzero #-}
   mplus = lift2TaggedT mplus
   {-# INLINE mplus #-}
 
-instance MonadFix m => MonadFix (TaggedT tag m) where
+instance (MonadFix m) => MonadFix (TaggedT tag m) where
   mfix f = TaggedT (mfix (runTaggedT . f))
   {-# INLINE mfix #-}
 
-instance MonadIO m => MonadIO (TaggedT tag m) where
+instance (MonadIO m) => MonadIO (TaggedT tag m) where
   liftIO = TaggedT . liftIO
   {-# INLINE liftIO #-}
 
-instance MonadZip m => MonadZip (TaggedT tag m) where
+instance (MonadZip m) => MonadZip (TaggedT tag m) where
   mzipWith f = lift2TaggedT (mzipWith f)
   {-# INLINE mzipWith #-}
 
@@ -155,26 +155,26 @@ liftCatch f m h = TaggedT $ f (runTaggedT m) (runTaggedT . h)
 ----------------------------------------------------------------------------
 -- MTL instances
 
-instance MonadCont m => MonadCont (TaggedT tag m) where
+instance (MonadCont m) => MonadCont (TaggedT tag m) where
   callCC = liftCallCC callCC
 
-instance MonadError e m => MonadError e (TaggedT tag m) where
+instance (MonadError e m) => MonadError e (TaggedT tag m) where
   throwError = lift . throwError
   catchError = liftCatch catchError
 
-instance MonadRWS r w s m => MonadRWS r w s (TaggedT tag m)
+instance (MonadRWS r w s m) => MonadRWS r w s (TaggedT tag m)
 
-instance MonadReader r m => MonadReader r (TaggedT tag m) where
+instance (MonadReader r m) => MonadReader r (TaggedT tag m) where
   ask = lift ask
   local = mapTaggedT . local
   reader = lift . reader
 
-instance MonadState s m => MonadState s (TaggedT tag m) where
+instance (MonadState s m) => MonadState s (TaggedT tag m) where
   get = lift get
   put = lift . put
   state = lift . state
 
-instance MonadWriter w m => MonadWriter w (TaggedT tag m) where
+instance (MonadWriter w m) => MonadWriter w (TaggedT tag m) where
   writer = lift . writer
   tell = lift . tell
   listen = mapTaggedT listen
