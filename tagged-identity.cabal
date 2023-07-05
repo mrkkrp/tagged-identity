@@ -31,7 +31,7 @@ flag dev
 
 library
     exposed-modules:  Control.Monad.Trans.Identity.Tagged
-    default-language: Haskell2010
+    default-language: GHC2021
     build-depends:
         base >=4.15 && <5.0,
         mtl >=2.0 && <3.0,
