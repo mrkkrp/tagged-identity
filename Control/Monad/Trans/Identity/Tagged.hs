@@ -2,6 +2,7 @@
 {-# LANGUAGE MultiParamTypeClasses #-}
 {-# LANGUAGE PolyKinds #-}
 {-# LANGUAGE UndecidableInstances #-}
+{-# OPTIONS_GHC -fno-warn-dodgy-imports #-}
 
 -- |
 -- Module      :  Control.Monad.Trans.Identity.Tagged
@@ -31,7 +32,7 @@ where
 
 import Control.Applicative
 import Control.Monad (MonadPlus (..))
-import Control.Monad.Cont.Class
+import Control.Monad.Cont.Class hiding (liftCallCC)
 import Control.Monad.Error.Class
 import Control.Monad.Fail qualified as Fail
 import Control.Monad.Fix (MonadFix (..))
