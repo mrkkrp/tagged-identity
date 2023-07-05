@@ -33,7 +33,7 @@ import Control.Applicative
 import Control.Monad (MonadPlus (..))
 import Control.Monad.Cont.Class
 import Control.Monad.Error.Class
-import qualified Control.Monad.Fail as Fail
+import Control.Monad.Fail qualified as Fail
 import Control.Monad.Fix (MonadFix (..))
 import Control.Monad.IO.Class (MonadIO (..))
 import Control.Monad.RWS.Class
