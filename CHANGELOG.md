@@ -1,4 +1,4 @@
-## Unreleased
+## Tagged Identity 0.1.4
 
 * Builds with GHC 9.6.
 
