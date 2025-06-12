@@ -95,6 +95,8 @@ instance (Applicative m) => Applicative (TaggedT tag m) where
   {-# INLINE pure #-}
   (<*>) = lift2TaggedT (<*>)
   {-# INLINE (<*>) #-}
+  (*>) = lift2TaggedT (*>)
+  {-# INLINE (*>) #-}
 
 instance (Alternative m) => Alternative (TaggedT tag m) where
   empty = TaggedT empty
