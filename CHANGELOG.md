@@ -1,3 +1,8 @@
+## Tagged Identity 0.1.5
+
+* Optimize `(*>)`, see [PR
+  35](https://github.com/mrkkrp/tagged-identity/pull/35).
+
 ## Tagged Identity 0.1.4
 
 * Builds with GHC 9.6.
