@@ -8,11 +8,14 @@ author:          Mark Karpov <markkarpov92@gmail.com>
 tested-with:     ghc ==9.10.3 ghc ==9.12.4 ghc ==9.14.1
 homepage:        https://github.com/mrkkrp/tagged-identity
 bug-reports:     https://github.com/mrkkrp/tagged-identity/issues
-synopsis:
-    Trivial monad transformer that allows identical monad stacks to have different types
-
+synopsis:        Trivial monad transformer for tagging monadic stacks.
 description:
-    Trivial monad transformer that allows identical monad stacks to have different types.
+    The library provides a monad transformer that works just like
+    IdentityT, but can be tagged at the type level. This allows us to work
+    with monad stacks as usual, except we can make two identical monad stacks
+    to have different types. The main application for this is, of course, the
+    ability to have different instances for otherwise identical stacks
+    without having to do newtype wrapping.
 
 category:        Control
 build-type:      Simple
