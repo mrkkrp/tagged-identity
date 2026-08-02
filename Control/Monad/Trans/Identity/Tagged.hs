@@ -16,7 +16,7 @@
 -- The library provides a monad transformer that works just like
 -- 'IdentityT', but can be tagged at the type level. This allows us to work
 -- with monad stacks as usual, except we can make two identical monad stacks
--- to have different types. The main application for this is, of course, the
+-- have different types. The main application for this is, of course, the
 -- ability to have different instances for otherwise identical stacks
 -- without having to do @newtype@ wrapping.
 module Control.Monad.Trans.Identity.Tagged
