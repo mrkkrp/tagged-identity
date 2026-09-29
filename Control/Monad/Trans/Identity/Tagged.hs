@@ -44,7 +44,7 @@ import Control.Monad.Zip (MonadZip (..))
 import Data.Functor.Classes
 
 -- | Identity monad transformer with a type-level tag.
-newtype TaggedT tag f a = TaggedT {runTaggedT :: f a}
+newtype TaggedT tag f a = TaggedT{runTaggedT :: f a}
 
 ----------------------------------------------------------------------------
 -- Standard instances
